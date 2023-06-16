@@ -31,7 +31,7 @@ except ImportError:
 from adafruit_platformdetect.constants import boards, chips
 
 
-__version__ = "0.0.0+auto.0"
+__version__ = "3.47.1"
 __repo__ = "https://github.com/adafruit/Adafruit_CircuitPython_PlatformDetect.git"
 
 
@@ -398,6 +398,10 @@ class Board:
             board = boards.NANOPI_NEO
         elif board_value == "nezha":
             board = boards.LICHEE_RV
+        elif board_value == "mangopi-mq":
+            board = boards.MANGOPI_MQ_PRO
+        elif board_value == "mangopimcore":
+            board = boards.MANGOPI_MQ_QUAD
         elif board_value == "pcduino2":
             board = boards.PCDUINO2
         elif board_value == "pcduino3":
@@ -760,6 +764,11 @@ class Board:
         return self.id in boards._ORANGE_PI_IDS
 
     @property
+    def any_mangopi(self) -> bool:
+        """Check whether the current board is any defined MangoPi."""
+        return self.id in boards._MANGOPI_IDS
+
+    @property
     def any_lubancat(self) -> bool:
         """Check whether the current board is any defined lubancat."""
         return self.id in boards._LUBANCAT_IDS
@@ -935,6 +944,7 @@ class Board:
             yield self.any_tisk_board
             yield self.any_siemens_simatic_iot2000
             yield self.any_lichee_riscv_board
+            yield self.any_mangopi
             yield self.any_pcduino_board
             yield self.any_libre_computer_board
             yield self.generic_linux
